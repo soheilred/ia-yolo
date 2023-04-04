@@ -58,7 +58,7 @@ class YOLOV3(object):
             filters = [x(filtered_image_batch, cfg) for x in filters]
             filter_parameters = []
             for j, filter in enumerate(filters):
-                with tf.variable_scope('filter_%d' % j):
+                with tf.compat.v1.variable_scope('filter_%d' % j):
                     print('    creating filter:', j, 'name:', str(filter.__class__), 'abbr.',
                           filter.get_short_name())
                     print('      filter_features:', filter_features.shape)
