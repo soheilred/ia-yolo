@@ -59,7 +59,7 @@ def parse_annotation(annotation):
         #img_name = '/data/vdd/liuwenyu/data_vocfog/val/JPEGImages/' + image_name \
         #   + '_' + ("%.2f"%beta) + '.' + image_name_index
         cv2.imwrite(img_name, img_f)
-        print(img_name, "is saved")
+        # print(img_name, "is saved")
 
 
 if __name__ == '__main__':
