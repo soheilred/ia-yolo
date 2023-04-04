@@ -107,7 +107,7 @@ def residual_block(input_data, input_channel, filter_num1, filter_num2, trainabl
 
     short_cut = input_data
 
-    with tf.variable_scope(name):
+    with tf.compat.v1.variable_scope(name):
         input_data = convolutional(input_data, filters_shape=(1, 1, input_channel, filter_num1),
                                    trainable=trainable, name='conv1')
         input_data = convolutional(input_data, filters_shape=(3, 3, filter_num1,   filter_num2),
@@ -121,7 +121,7 @@ def residual_block(input_data, input_channel, filter_num1, filter_num2, trainabl
 
 def route(name, previous_output, current_output):
 
-    with tf.variable_scope(name):
+    with tf.compat.v1.variable_scope(name):
         output = tf.concat([current_output, previous_output], axis=-1)
 
     return output
@@ -131,7 +131,7 @@ def upsample(input_data, name, method="deconv"):
     assert method in ["resize", "deconv"]
 
     if method == "resize":
-        with tf.variable_scope(name):
+        with tf.compat.v1.variable_scope(name):
             input_shape = tf.shape(input_data)
             output = tf.compat.v1.image.resize_nearest_neighbor(input_data, (input_shape[1] * 2, input_shape[2] * 2))
 
