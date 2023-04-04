@@ -15,7 +15,7 @@ parser.add_argument('--exp_dir', dest='exp_dir', default='./experiments', help='
 parser.add_argument('--gpu_id', dest='gpu_id', type=str, default='7', help='if use gpu, use gpu device id')
 parser.add_argument('--ISP_FLAG', dest='ISP_FLAG', type=bool, default=True, help='whether use DIP Module')
 parser.add_argument('--fog_FLAG', dest='fog_FLAG', type=bool, default=True, help='whether use Hybrid data training')
-parser.add_argument('--vocfog_traindata_dir', dest='vocfog_traindata_dir', default='/data/vdd/liuwenyu/data_vocfog/train/JPEGImages/',
+parser.add_argument('--vocfog_traindata_dir', dest='vocfog_traindata_dir', default='/data/data_vocfog/train/JPEGImages/',
                     help='the dir contains ten levels synthetic foggy images')
 parser.add_argument('--vocfog_valdata_dir', dest='vocfog_valdata_dir', default='/data/vdd/liuwenyu/data_vocfog/val/JPEGImages/',
                     help='the dir contains ten levels synthetic foggy images')
