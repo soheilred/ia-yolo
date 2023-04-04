@@ -23,7 +23,7 @@ parser.add_argument('--ISP_FLAG', dest='ISP_FLAG', type=bool, default=True,
 parser.add_argument('--fog_FLAG', dest='fog_FLAG', type=bool, default=True,
                     help='whether use Hybrid data training') 
 parser.add_argument('--vocfog_traindata_dir', dest='vocfog_traindata_dir',
-                    default='/data/data_vocfog/train/JPEGImages/', 
+                    default='data/data_vocfog/train/JPEGImages/', 
                     help='the dir contains ten levels synthetic foggy images') 
 parser.add_argument('--vocfog_valdata_dir', dest='vocfog_valdata_dir',
                     default='/data/vdd/liuwenyu/data_vocfog/val/JPEGImages/', 
