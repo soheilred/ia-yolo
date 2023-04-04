@@ -93,7 +93,7 @@ class YOLOV3(object):
         input_data = common.convolutional(input_data, (1, 1,  512,  256), self.trainable, 'conv57')
         input_data = common.upsample(input_data, name='upsample0', method=self.upsample_method)
 
-        with tf.variable_scope('route_1'):
+        with tf.compat.v1.variable_scope('route_1'):
             input_data = tf.concat([input_data, route_2], axis=-1)
 
         input_data = common.convolutional(input_data, (1, 1, 768, 256), self.trainable, 'conv58')
@@ -109,7 +109,7 @@ class YOLOV3(object):
         input_data = common.convolutional(input_data, (1, 1, 256, 128), self.trainable, 'conv63')
         input_data = common.upsample(input_data, name='upsample1', method=self.upsample_method)
 
-        with tf.variable_scope('route_2'):
+        with tf.compat.v1.variable_scope('route_2'):
             input_data = tf.concat([input_data, route_1], axis=-1)
 
         input_data = common.convolutional(input_data, (1, 1, 384, 128), self.trainable, 'conv64')
