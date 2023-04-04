@@ -104,7 +104,7 @@ class YoloTrain(object):
                                     (1 + tf.cos(
                                         (self.global_step - warmup_steps) / (train_steps - warmup_steps) * np.pi))
             )
-            global_step_update = tf.assign_add(self.global_step, 1.0)
+            global_step_update = tf.compat.v1.assign_add(self.global_step, 1.0)
 
         with tf.name_scope("define_weight_decay"):
             moving_ave = tf.train.ExponentialMovingAverage(self.moving_ave_decay).apply(tf.trainable_variables())
@@ -117,9 +117,9 @@ class YoloTrain(object):
                 if var_name_mess[0] in ['conv_sbbox', 'conv_mbbox', 'conv_lbbox']:
                     self.first_stage_trainable_var_list.append(var)
 
-            first_stage_optimizer = tf.train.AdamOptimizer(self.learn_rate).minimize(self.loss,
+            first_stage_optimizer = tf.compat.v1.train.AdamOptimizer(self.learn_rate).minimize(self.loss,
                                                       var_list=self.first_stage_trainable_var_list)
-            with tf.control_dependencies(tf.get_collection(tf.GraphKeys.UPDATE_OPS)):
+            with tf.control_dependencies(tf.compat.v1.get_collection(tf.compat.v1.GraphKeys.UPDATE_OPS)):
                 with tf.control_dependencies([first_stage_optimizer, global_step_update]):
                     with tf.control_dependencies([moving_ave]):
                         self.train_op_with_frozen_variables = tf.no_op()
@@ -137,28 +137,28 @@ class YoloTrain(object):
 
 
         with tf.name_scope('loader_and_saver'):
-            self.loader = tf.train.Saver(self.net_var)
-            self.saver  = tf.train.Saver(tf.global_variables(), max_to_keep=5)
+            self.loader = tf.compat.v1.train.Saver(self.net_var)
+            self.saver  = tf.compat.v1.train.Saver(tf.global_variables(), max_to_keep=5)
 
         with tf.name_scope('summary'):
-            tf.summary.scalar("learn_rate",      self.learn_rate)
-            tf.summary.scalar("recovery_loss",  self.recovery_loss)
-            tf.summary.scalar("giou_loss",  self.giou_loss)
-            tf.summary.scalar("conf_loss",  self.conf_loss)
-            tf.summary.scalar("prob_loss",  self.prob_loss)
-            tf.summary.scalar("total_loss", self.loss)
+            tf.compat.v1.summary.scalar("learn_rate",      self.learn_rate)
+            tf.compat.v1.summary.scalar("recovery_loss",  self.recovery_loss)
+            tf.compat.v1.summary.scalar("giou_loss",  self.giou_loss)
+            tf.compat.v1.summary.scalar("conf_loss",  self.conf_loss)
+            tf.compat.v1.summary.scalar("prob_loss",  self.prob_loss)
+            tf.compat.v1.summary.scalar("total_loss", self.loss)
 
             # logdir = "./data/log/"
             logdir = os.path.join(exp_folder, 'log')
 
             if os.path.exists(logdir): shutil.rmtree(logdir)
             os.mkdir(logdir)
-            self.write_op = tf.summary.merge_all()
-            self.summary_writer  = tf.summary.FileWriter(logdir, graph=self.sess.graph)
+            self.write_op = tf.compat.v1.summary.merge_all()
+            self.summary_writer  = tf.compat.v1.summary.FileWriter(logdir, graph=self.sess.graph)
 
 
     def train(self):
-        self.sess.run(tf.global_variables_initializer())
+        self.sess.run(tf.compat.v1.global_variables_initializer())
         try:
             print('=> Restoring weights from: %s ... ' % self.initial_weight)
             self.loader.restore(self.sess, self.initial_weight)
