@@ -60,9 +60,9 @@ class YoloTrain(object):
         self.trainset            = Dataset('train')
         self.testset             = Dataset('test')
         self.steps_per_period    = len(self.trainset)
-        config = tf.ConfigProto()
+        config = tf.compat.v1.ConfigProto()
         config.gpu_options.allow_growth = True
-        self.sess = tf.Session(config=config)
+        self.sess = tf.compat.v1.Session(config=config)
         # self.sess                = tf.Session(config=tf.ConfigProto(allow_soft_placement=True))
 
         with tf.name_scope('define_input'):

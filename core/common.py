@@ -73,7 +73,7 @@ def extract_parameters_2(net, cfg, trainable):
 
 def convolutional(input_data, filters_shape, trainable, name, downsample=False, activate=True, bn=True):
 
-    with tf.variable_scope(name):
+    with tf.compat.v1.variable_scope(name):
         if downsample:
             pad_h, pad_w = (filters_shape[0] - 2) // 2 + 1, (filters_shape[1] - 2) // 2 + 1
             paddings = tf.constant([[0, 0], [pad_h, pad_h], [pad_w, pad_w], [0, 0]])
