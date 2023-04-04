@@ -84,7 +84,7 @@ class YoloTrain(object):
             t_variables = tf.trainable_variables()
             print("t_variables", t_variables)
             # self.net_var = [v for v in t_variables if not 'extract_parameters' in v.name]
-            self.net_var = tf.global_variables()
+            self.net_var = tf.compat.v1.global_variables()
             self.giou_loss, self.conf_loss, self.prob_loss, self.recovery_loss = self.model.compute_loss(
                                                     self.label_sbbox,  self.label_mbbox,  self.label_lbbox,
                                                     self.true_sbboxes, self.true_mbboxes, self.true_lbboxes)
@@ -126,10 +126,10 @@ class YoloTrain(object):
 
         with tf.name_scope("define_second_stage_train"):
             second_stage_trainable_var_list = tf.trainable_variables()
-            second_stage_optimizer = tf.train.AdamOptimizer(self.learn_rate).minimize(self.loss,
+            second_stage_optimizer = tf.compat.v1.train.AdamOptimizer(self.learn_rate).minimize(self.loss,
                                                       var_list=second_stage_trainable_var_list)
 
-            with tf.control_dependencies(tf.get_collection(tf.GraphKeys.UPDATE_OPS)):
+            with tf.control_dependencies(tf.compat.v1.get_collection(tf.compat.v1.GraphKeys.UPDATE_OPS)):
                 with tf.control_dependencies([second_stage_optimizer, global_step_update]):
                     with tf.control_dependencies([moving_ave]):
                         self.train_op_with_all_variables = tf.no_op()
@@ -158,7 +158,7 @@ class YoloTrain(object):
 
 
     def train(self):
-        self.sess.run(tf.compat.v1.global_variables_initializer())
+        self.sess.run(tf.global_variables_initializer())
         try:
             print('=> Restoring weights from: %s ... ' % self.initial_weight)
             self.loader.restore(self.sess, self.initial_weight)
