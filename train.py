@@ -68,7 +68,7 @@ class YoloTrain(object):
         with tf.name_scope('define_input'):
             self.input_data   = tf.compat.v1.placeholder(tf.float32, [None, None, None, 3], name='input_data')
             self.defog_A   = tf.compat.v1.placeholder(tf.float32, [None, 3], name='defog_A')
-            self.IcA   = tf.placeholder(tf.float32, [None, None, None,1], name='IcA')
+            self.IcA   = tf.compat.v1..placeholder(tf.float32, [None, None, None,1], name='IcA')
             self.label_sbbox  = tf.compat.v1.placeholder(dtype=tf.float32, name='label_sbbox')
             self.label_mbbox  = tf.compat.v1.placeholder(dtype=tf.float32, name='label_mbbox')
             self.label_lbbox  = tf.compat.v1.placeholder(dtype=tf.float32, name='label_lbbox')
