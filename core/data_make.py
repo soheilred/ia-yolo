@@ -64,7 +64,7 @@ def parse_annotation(annotation):
 
 if __name__ == '__main__':
     # an = load_annotations('data/dataset_fog/voc_norm_train.txt')
-    an = load_annotations('data/dataset_fog/voc_0')
+    an = load_annotations('data/dataset_fog/voc_1')
     #an = load_annotations('/home/liuwenyu.lwy/code/defog_yolov3/data/dataset/voc_norm_test.txt')
     ll = len(an)
     print(ll)
