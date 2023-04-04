@@ -12,7 +12,8 @@ def convert_voc_annotation(data_path, data_type, anno_path, use_difficult_bbox=F
     img_inds_file = os.path.join(data_path, 'ImageSets', 'Main', data_type + '.txt')
     with open(img_inds_file, 'r') as f:
         txt = f.readlines()
-        image_inds = [line.strip()[0] for line in txt]
+        import ipdb; ipdb.set_trace()
+        image_inds = [line.strip() for line in txt]
 
     with open(anno_path, 'a') as f:
         for image_ind in image_inds:
