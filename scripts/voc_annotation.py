@@ -48,11 +48,11 @@ if __name__ == '__main__':
     flags = parser.parse_args()
 
     if os.path.exists(flags.train_annotation):os.remove(flags.train_annotation)
-    if os.path.exists(flags.val_annotation):os.remove(flags.val_annotation)
+    # if os.path.exists(flags.val_annotation):os.remove(flags.val_annotation)
     if os.path.exists(flags.test_annotation):os.remove(flags.val_annotation)
 
-    num1 = convert_voc_annotation(os.path.join(flags.data_path, 'train/VOCdevkit/VOC2007'), 'trainval', flags.train_annotation, False)
-    num2 = convert_voc_annotation(os.path.join(flags.data_path, 'train/VOCdevkit/VOC2012'), 'trainval', flags.train_annotation, False)
+    num1 = convert_voc_annotation(os.path.join(flags.data_path, 'train/VOCdevkit/VOC2007'), 'train_val', flags.train_annotation, False)
+    num2 = convert_voc_annotation(os.path.join(flags.data_path, 'train/VOCdevkit/VOC2012'), 'train_val', flags.train_annotation, False)
     num3 = convert_voc_annotation(os.path.join(flags.data_path, 'test/VOCdevkit/VOC2007'),  'test', flags.test_annotation, False)
     print('=> The number of image for train is: %d\tThe number of image for val is:%d\tThe number of image for test is:%d' %(num1, num2, num3))
 
