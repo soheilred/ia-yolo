@@ -170,7 +170,6 @@ class Dataset(object):
         image_name = img_name.split('.')[0]
         # print(image_name)
         image_name_index = img_name.split('.')[1]
-        import ipdb; ipdb.set_trace()
 
         # image = np.array(cv2.imread(image_path))
 
