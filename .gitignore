@@ -1,0 +1,18 @@
+*.jpg
+*.png
+# *.log
+*.csv
+data/
+
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+*~
+*.swp
+*.pt
+*.pt.old
+*.pth.tar
+
+src/syslocals.py
