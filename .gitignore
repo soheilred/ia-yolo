@@ -1,3 +1,6 @@
+*.jpg
+*.png
+# *.log
 *.csv
 data/
 
@@ -11,5 +14,4 @@ __pycache__/
 *.pt
 *.pt.old
 *.pth.tar
-
 
