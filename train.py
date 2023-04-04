@@ -111,7 +111,7 @@ class YoloTrain(object):
 
         with tf.name_scope("define_first_stage_train"):
             self.first_stage_trainable_var_list = []
-            for var in tf.trainable_variables():
+            for var in tf.compat.v1.trainable_variables():
                 var_name = var.op.name
                 var_name_mess = str(var_name).split('/')
                 if var_name_mess[0] in ['conv_sbbox', 'conv_mbbox', 'conv_lbbox']:
