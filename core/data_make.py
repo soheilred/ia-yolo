@@ -4,6 +4,7 @@ import cv2
 import math
 from numba import jit
 import random
+from tqdm import tqdm
 
 # only use the image including the labeled instance objects for training
 def load_annotations(annot_path):
@@ -65,6 +66,6 @@ if __name__ == '__main__':
     #an = load_annotations('/home/liuwenyu.lwy/code/defog_yolov3/data/dataset/voc_norm_test.txt')
     ll = len(an)
     print(ll)
-    for j in range(ll):
+    for j in tqdm(range(ll)):
         parse_annotation(an[j])
 
