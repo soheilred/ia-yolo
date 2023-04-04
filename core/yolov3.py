@@ -32,13 +32,13 @@ class YOLOV3(object):
         except:
             raise NotImplementedError("Can not build up yolov3 network!")
 
-        with tf.variable_scope('pred_sbbox'):
+        with tf.compat.v1.variable_scope('pred_sbbox'):
             self.pred_sbbox = self.decode(self.conv_sbbox, self.anchors[0], self.strides[0])
 
-        with tf.variable_scope('pred_mbbox'):
+        with tf.compat.v1.variable_scope('pred_mbbox'):
             self.pred_mbbox = self.decode(self.conv_mbbox, self.anchors[1], self.strides[1])
 
-        with tf.variable_scope('pred_lbbox'):
+        with tf.compat.v1.variable_scope('pred_lbbox'):
             self.pred_lbbox = self.decode(self.conv_lbbox, self.anchors[2], self.strides[2])
 
     def __build_nework(self, input_data, isp_flag, input_data_clean, defog_A, IcA):
@@ -50,7 +50,7 @@ class YOLOV3(object):
             # start_time = time.time()
 
             with tf.variable_scope('extract_parameters_2'):
-                input_data = tf.image.resize_images(input_data, [256, 256], method=tf.image.ResizeMethod.BILINEAR)
+                input_data = tf.image.resize(input_data, [256, 256], method=tf.image.ResizeMethod.BILINEAR)
                 filter_features = common.extract_parameters_2(input_data, cfg, self.trainable)
 
             # filter_features = tf.random_normal([1, 15], 0.5, 0.1)

@@ -66,23 +66,23 @@ class YoloTrain(object):
         # self.sess                = tf.Session(config=tf.ConfigProto(allow_soft_placement=True))
 
         with tf.name_scope('define_input'):
-            self.input_data   = tf.placeholder(tf.float32, [None, None, None, 3], name='input_data')
-            self.defog_A   = tf.placeholder(tf.float32, [None, 3], name='defog_A')
+            self.input_data   = tf.compat.v1.placeholder(tf.float32, [None, None, None, 3], name='input_data')
+            self.defog_A   = tf.compat.v1.placeholder(tf.float32, [None, 3], name='defog_A')
             self.IcA   = tf.placeholder(tf.float32, [None, None, None,1], name='IcA')
-            self.label_sbbox  = tf.placeholder(dtype=tf.float32, name='label_sbbox')
-            self.label_mbbox  = tf.placeholder(dtype=tf.float32, name='label_mbbox')
-            self.label_lbbox  = tf.placeholder(dtype=tf.float32, name='label_lbbox')
-            self.true_sbboxes = tf.placeholder(dtype=tf.float32, name='sbboxes')
-            self.true_mbboxes = tf.placeholder(dtype=tf.float32, name='mbboxes')
-            self.true_lbboxes = tf.placeholder(dtype=tf.float32, name='lbboxes')
-            self.input_data_clean   = tf.placeholder(tf.float32, [None, None, None, 3], name='input_data')
+            self.label_sbbox  = tf.compat.v1.placeholder(dtype=tf.float32, name='label_sbbox')
+            self.label_mbbox  = tf.compat.v1.placeholder(dtype=tf.float32, name='label_mbbox')
+            self.label_lbbox  = tf.compat.v1.placeholder(dtype=tf.float32, name='label_lbbox')
+            self.true_sbboxes = tf.compat.v1.placeholder(dtype=tf.float32, name='sbboxes')
+            self.true_mbboxes = tf.compat.v1.placeholder(dtype=tf.float32, name='mbboxes')
+            self.true_lbboxes = tf.compat.v1.placeholder(dtype=tf.float32, name='lbboxes')
+            self.input_data_clean   = tf.compat.v1.placeholder(tf.float32, [None, None, None, 3], name='input_data')
 
             self.trainable     = tf.placeholder(dtype=tf.bool, name='training')
 
         with tf.name_scope("define_loss"):
             self.model = YOLOV3(self.input_data, self.trainable, self.input_data_clean, self.defog_A, self.IcA)
-            t_variables = tf.trainable_variables()
-            print("t_variables", t_variables)
+            t_variables = tf.compat.v1.trainable_variables()
+            # print("t_variables", t_variables)
             # self.net_var = [v for v in t_variables if not 'extract_parameters' in v.name]
             self.net_var = tf.compat.v1.global_variables()
             self.giou_loss, self.conf_loss, self.prob_loss, self.recovery_loss = self.model.compute_loss(
