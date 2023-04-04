@@ -33,7 +33,7 @@ def parse_annotation(annotation):
         raise KeyError("%s does not exist ... " %image_path)
     image = cv2.imread(image_path)
     for i in range(10):
-        # @jit()
+        @jit()
         def AddHaz_loop(img_f, center, size, beta, A):
             (row, col, chs) = img_f.shape
 
