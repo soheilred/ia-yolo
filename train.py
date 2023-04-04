@@ -138,7 +138,7 @@ class YoloTrain(object):
 
         with tf.name_scope('loader_and_saver'):
             self.loader = tf.compat.v1.train.Saver(self.net_var)
-            self.saver  = tf.compat.v1.train.Saver(tf.global_variables(), max_to_keep=5)
+            self.saver  = tf.compat.v1.train.Saver(tf.compat.v1.global_variables(), max_to_keep=5)
 
         with tf.name_scope('summary'):
             tf.compat.v1.summary.scalar("learn_rate",      self.learn_rate)
@@ -158,7 +158,7 @@ class YoloTrain(object):
 
 
     def train(self):
-        self.sess.run(tf.global_variables_initializer())
+        self.sess.run(tf.compat.v1.global_variables_initializer())
         try:
             print('=> Restoring weights from: %s ... ' % self.initial_weight)
             self.loader.restore(self.sess, self.initial_weight)
