@@ -29,16 +29,16 @@ parser.add_argument('--vocfog_valdata_dir', dest='vocfog_valdata_dir',
                     default='/data/vdd/liuwenyu/data_vocfog/val/JPEGImages/', 
                     help='the dir contains ten levels synthetic foggy images')
 parser.add_argument('--train_path', dest='train_path', nargs='*',
-                    default='./data/dataset_fog/voc_norm_train.txt',
+                    default='data/dataset_fog/voc_norm_train.txt',
                     help='folder of the training data') 
 parser.add_argument('--val_path', dest='val_path', nargs='*',
-                    default='./data/dataset_fog/voc_norm_test.txt',
+                    default='data/dataset_fog/voc_norm_test.txt',
                     help='folder of the training data') 
 parser.add_argument('--test_path', dest='test_path', nargs='*',
-                    default='./data/dataset_fog/quick_test.txt',
+                    default='data/dataset_fog/quick_test.txt',
                     help='folder of the training data') 
 parser.add_argument('--class_name', dest='class_name', nargs='*',
-                    default='./data/classes/vocfog.names',
+                    default='data/classes/vocfog.names',
                     help='folder of the training data') 
 parser.add_argument('--WRITE_IMAGE_PATH', dest='WRITE_IMAGE_PATH', nargs='*',
                     default='./experiments/exp_101/detection_results/',
