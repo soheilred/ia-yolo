@@ -43,7 +43,7 @@ class Dataset(object):
     def load_annotations(self, dataset_type):
         with open(self.annot_path, 'r') as f:
             txt = f.readlines()
-            import ipdb; ipdb.set_trace()
+            # import ipdb; ipdb.set_trace()
             annotations = [line.strip() for line in txt if len(line.strip().split()[1:]) != 0]
         np.random.shuffle(annotations)
         print(f'######### total image in {dataset_type} is {len(annotations)}')
@@ -170,6 +170,7 @@ class Dataset(object):
         image_name = img_name.split('.')[0]
         # print(image_name)
         image_name_index = img_name.split('.')[1]
+        import ipdb; ipdb.set_trace()
 
         # image = np.array(cv2.imread(image_path))
 
