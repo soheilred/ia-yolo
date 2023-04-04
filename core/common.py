@@ -133,7 +133,7 @@ def upsample(input_data, name, method="deconv"):
     if method == "resize":
         with tf.variable_scope(name):
             input_shape = tf.shape(input_data)
-            output = tf.image.resize_nearest_neighbor(input_data, (input_shape[1] * 2, input_shape[2] * 2))
+            output = tf.compat.v1.image.resize_nearest_neighbor(input_data, (input_shape[1] * 2, input_shape[2] * 2))
 
     if method == "deconv":
         # replace resize_nearest_neighbor with conv2d_transpose To support TensorRT optimization

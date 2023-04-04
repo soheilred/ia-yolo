@@ -49,7 +49,7 @@ class YOLOV3(object):
         if isp_flag:
             # start_time = time.time()
 
-            with tf.variable_scope('extract_parameters_2'):
+            with tf.compat.v1.variable_scope('extract_parameters_2'):
                 input_data = tf.image.resize(input_data, [256, 256], method=tf.image.ResizeMethod.BILINEAR)
                 filter_features = common.extract_parameters_2(input_data, cfg, self.trainable)
 

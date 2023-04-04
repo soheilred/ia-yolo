@@ -77,7 +77,7 @@ class YoloTrain(object):
             self.true_lbboxes = tf.compat.v1.placeholder(dtype=tf.float32, name='lbboxes')
             self.input_data_clean   = tf.compat.v1.placeholder(tf.float32, [None, None, None, 3], name='input_data')
 
-            self.trainable     = tf.placeholder(dtype=tf.bool, name='training')
+            self.trainable     = tf.compat.v1.placeholder(dtype=tf.bool, name='training')
 
         with tf.name_scope("define_loss"):
             self.model = YOLOV3(self.input_data, self.trainable, self.input_data_clean, self.defog_A, self.IcA)
@@ -107,7 +107,7 @@ class YoloTrain(object):
             global_step_update = tf.compat.v1.assign_add(self.global_step, 1.0)
 
         with tf.name_scope("define_weight_decay"):
-            moving_ave = tf.train.ExponentialMovingAverage(self.moving_ave_decay).apply(tf.trainable_variables())
+            moving_ave = tf.train.ExponentialMovingAverage(self.moving_ave_decay).apply(tf.compat.v1.trainable_variables())
 
         with tf.name_scope("define_first_stage_train"):
             self.first_stage_trainable_var_list = []
