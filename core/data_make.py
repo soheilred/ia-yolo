@@ -66,7 +66,7 @@ def parse_annotation(annotation, img_dir):
 
 if __name__ == '__main__':
     # an = load_annotations('data/dataset_fog/voc_norm_train.txt')
-    an = load_annotations('data/dataset_fog/voc_fog_test.txt')
+    an = load_annotations('data/dataset_fog/voc_norm_test.txt')
     #an = load_annotations('/home/liuwenyu.lwy/code/defog_yolov3/data/dataset/voc_norm_test.txt')
     ll = len(an)
     print(ll)
