@@ -65,7 +65,6 @@ class YoloTrain(object):
         self.sess = tf.compat.v1.Session(config=config)
         # self.sess                = tf.Session(config=tf.ConfigProto(allow_soft_placement=True))
 
-        import ipdb; ipdb.set_trace()
         with tf.name_scope('define_input'):
             self.input_data   = tf.compat.v1.placeholder(tf.float32, [None, None, None, 3], name='input_data')
             self.defog_A   = tf.compat.v1.placeholder(tf.float32, [None, 3], name='defog_A')
