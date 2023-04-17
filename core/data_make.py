@@ -54,9 +54,11 @@ def parse_annotation(annotation):
         foggy_image = AddHaz_loop(img_f, center, size, beta, A)
         img_f = np.clip(foggy_image*255, 0, 255)
         img_f = img_f.astype(np.uint8)
-        img_name = 'data/data_vocfog/train/JPEGImages/' + image_name \
+        img_name = 'data/data_vocfog/val/JPEGImages/' + image_name \
                    + '_' + ("%.2f"%beta) + '.' + image_name_index
-        #img_name = '/data/vdd/liuwenyu/data_vocfog/val/JPEGImages/' + image_name \
+        # img_name = 'data/data_vocfog/train/JPEGImages/' + image_name \
+        #            + '_' + ("%.2f"%beta) + '.' + image_name_index
+        # img_name = '/data/vdd/liuwenyu/data_vocfog/val/JPEGImages/' + image_name \
         #   + '_' + ("%.2f"%beta) + '.' + image_name_index
         cv2.imwrite(img_name, img_f)
         # print(img_name, "is saved")

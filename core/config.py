@@ -26,7 +26,7 @@ parser.add_argument('--vocfog_traindata_dir', dest='vocfog_traindata_dir',
                     default='data/data_vocfog/train/JPEGImages/', 
                     help='the dir contains ten levels synthetic foggy images') 
 parser.add_argument('--vocfog_valdata_dir', dest='vocfog_valdata_dir',
-                    default='/data/vdd/liuwenyu/data_vocfog/val/JPEGImages/', 
+                    default='data/data_vocfog/val/JPEGImages/', 
                     help='the dir contains ten levels synthetic foggy images')
 parser.add_argument('--train_path', dest='train_path', nargs='*',
                     default='data/dataset_fog/voc_norm_train.txt',
