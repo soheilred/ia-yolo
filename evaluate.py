@@ -47,11 +47,11 @@ class YoloTest(object):
         self.isp_flag = cfg.YOLO.ISP_FLAG
 
         with tf.name_scope('input'):
-            self.input_data = tf.placeholder(tf.float32, [None, None, None, 3], name='input_data')
-            self.defog_A   = tf.placeholder(tf.float32, [None, 3], name='defog_A')
-            self.IcA   = tf.placeholder(tf.float32, [None, None, None,1], name='IcA')
-            self.trainable  = tf.placeholder(dtype=tf.bool,    name='trainable')
-            self.input_data_clean = tf.placeholder(tf.float32, [None, None, None, 3], name='input_data')
+            self.input_data = tf.compat.v1.placeholder(tf.float32, [None, None, None, 3], name='input_data')
+            self.defog_A   = tf.compat.v1.placeholder(tf.float32, [None, 3], name='defog_A')
+            self.IcA   = tf.compat.v1.placeholder(tf.float32, [None, None, None,1], name='IcA')
+            self.trainable  = tf.compat.v1.placeholder(dtype=tf.bool,    name='trainable')
+            self.input_data_clean = tf.compat.v1.placeholder(tf.float32, [None, None, None, 3], name='input_data')
 
         model = YOLOV3(self.input_data, self.trainable,self.input_data_clean, self.defog_A, self.IcA)
         self.pred_sbbox, self.pred_mbbox, self.pred_lbbox, self.image_isped, self.isp_params, self.filter_imgs_series = \
@@ -59,9 +59,9 @@ class YoloTest(object):
 
         with tf.name_scope('ema'):
             ema_obj = tf.train.ExponentialMovingAverage(self.moving_ave_decay)
-        config = tf.ConfigProto()
+        config = tf.compat.v1.ConfigProto()
         config.gpu_options.allow_growth = True
-        self.sess = tf.Session(config=config)
+        self.sess = tf.compat.v1.Session(config=config)
 
         # self.sess  = tf.Session(config=tf.ConfigProto(allow_soft_placement=True))
         self.saver = tf.compat.v1.train.Saver(ema_obj.variables_to_restore())
