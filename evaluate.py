@@ -64,7 +64,7 @@ class YoloTest(object):
         self.sess = tf.Session(config=config)
 
         # self.sess  = tf.Session(config=tf.ConfigProto(allow_soft_placement=True))
-        self.saver = tf.compact.v1.train.Saver(ema_obj.variables_to_restore())
+        self.saver = tf.compat.v1.train.Saver(ema_obj.variables_to_restore())
         self.saver.restore(self.sess, self.weight_file)
 
     def predict(self, image, image_name):
