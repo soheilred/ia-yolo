@@ -260,6 +260,7 @@ class YoloTrain(object):
 
 
             if args.fog_FLAG:
+                import ipdb; ipdb.set_trace()
                 for test_data in self.testset:
                     dark = np.zeros((test_data[0].shape[0], test_data[0].shape[1], test_data[0].shape[2]))
                     defog_A = np.zeros((test_data[0].shape[0], test_data[0].shape[3]))
