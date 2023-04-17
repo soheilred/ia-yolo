@@ -65,6 +65,7 @@ class YoloTrain(object):
         self.sess = tf.compat.v1.Session(config=config)
         # self.sess                = tf.Session(config=tf.ConfigProto(allow_soft_placement=True))
 
+        import ipdb; ipdb.set_trace()
         with tf.name_scope('define_input'):
             self.input_data   = tf.compat.v1.placeholder(tf.float32, [None, None, None, 3], name='input_data')
             self.defog_A   = tf.compat.v1.placeholder(tf.float32, [None, 3], name='defog_A')
@@ -80,7 +81,8 @@ class YoloTrain(object):
             self.trainable     = tf.compat.v1.placeholder(dtype=tf.bool, name='training')
 
         with tf.name_scope("define_loss"):
-            self.model = YOLOV3(self.input_data, self.trainable, self.input_data_clean, self.defog_A, self.IcA)
+            self.model = YOLOV3(self.input_data, self.trainable,
+                                self.input_data_clean, self.defog_A, self.IcA) 
             t_variables = tf.compat.v1.trainable_variables()
             # print("t_variables", t_variables)
             # self.net_var = [v for v in t_variables if not 'extract_parameters' in v.name]
