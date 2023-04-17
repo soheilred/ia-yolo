@@ -80,27 +80,44 @@ class YOLOV3(object):
         input_data = filtered_image_batch
         route_1, route_2, input_data = backbone.darknet53(input_data, self.trainable)
 
-        input_data = common.convolutional(input_data, (1, 1, 1024,  512), self.trainable, 'conv52')
-        input_data = common.convolutional(input_data, (3, 3,  512, 1024), self.trainable, 'conv53')
-        input_data = common.convolutional(input_data, (1, 1, 1024,  512), self.trainable, 'conv54')
-        input_data = common.convolutional(input_data, (3, 3,  512, 1024), self.trainable, 'conv55')
-        input_data = common.convolutional(input_data, (1, 1, 1024,  512), self.trainable, 'conv56')
+        input_data = common.convolutional(input_data, (1, 1, 1024,  512),
+                                          self.trainable, 'conv52') 
+        input_data = common.convolutional(input_data, (3, 3,  512, 1024),
+                                          self.trainable, 'conv53') 
+        input_data = common.convolutional(input_data, (1, 1, 1024,  512),
+                                          self.trainable, 'conv54') 
+        input_data = common.convolutional(input_data, (3, 3,  512, 1024),
+                                          self.trainable, 'conv55') 
+        input_data = common.convolutional(input_data, (1, 1, 1024,  512),
+                                          self.trainable, 'conv56') 
 
-        conv_lobj_branch = common.convolutional(input_data, (3, 3, 512, 1024), self.trainable, name='conv_lobj_branch')
-        conv_lbbox = common.convolutional(conv_lobj_branch, (1, 1, 1024, 3*(self.num_class + 5)),
-                                          trainable=self.trainable, name='conv_lbbox', activate=False, bn=False)
+        conv_lobj_branch = common.convolutional(input_data, (3, 3, 512, 1024),
+                                                self.trainable,
+                                                name='conv_lobj_branch') 
+        conv_lbbox = common.convolutional(conv_lobj_branch,
+                                          (1, 1, 1024, 3*(self.num_class + 5)), 
+                                          trainable=self.trainable,
+                                          name='conv_lbbox', activate=False,
+                                          bn=False) 
 
-        input_data = common.convolutional(input_data, (1, 1,  512,  256), self.trainable, 'conv57')
-        input_data = common.upsample(input_data, name='upsample0', method=self.upsample_method)
+        input_data = common.convolutional(input_data, (1, 1,  512,  256),
+                                          self.trainable, 'conv57') 
+        input_data = common.upsample(input_data, name='upsample0',
+                                     method=self.upsample_method) 
 
         with tf.compat.v1.variable_scope('route_1'):
             input_data = tf.concat([input_data, route_2], axis=-1)
 
-        input_data = common.convolutional(input_data, (1, 1, 768, 256), self.trainable, 'conv58')
-        input_data = common.convolutional(input_data, (3, 3, 256, 512), self.trainable, 'conv59')
-        input_data = common.convolutional(input_data, (1, 1, 512, 256), self.trainable, 'conv60')
-        input_data = common.convolutional(input_data, (3, 3, 256, 512), self.trainable, 'conv61')
-        input_data = common.convolutional(input_data, (1, 1, 512, 256), self.trainable, 'conv62')
+        input_data = common.convolutional(input_data, (1, 1, 768, 256),
+                                          self.trainable, 'conv58') 
+        input_data = common.convolutional(input_data, (3, 3, 256, 512),
+                                          self.trainable, 'conv59') 
+        input_data = common.convolutional(input_data, (1, 1, 512, 256),
+                                          self.trainable, 'conv60') 
+        input_data = common.convolutional(input_data, (3, 3, 256, 512),
+                                          self.trainable, 'conv61') 
+        input_data = common.convolutional(input_data, (1, 1, 512, 256),
+                                          self.trainable, 'conv62') 
 
         conv_mobj_branch = common.convolutional(input_data, (3, 3, 256, 512),  self.trainable, name='conv_mobj_branch' )
         conv_mbbox = common.convolutional(conv_mobj_branch, (1, 1, 512, 3*(self.num_class + 5)),

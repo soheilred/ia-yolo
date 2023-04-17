@@ -260,13 +260,11 @@ class YoloTrain(object):
 
                 pbar.set_description("train loss: %.2f" % train_step_loss)
 
-            import ipdb; ipdb.set_trace()
             ckpt_file = args.ckpt_dir + "/yolov3_train_loss=%.4f.ckpt" % np.mean(train_epoch_loss)
             self.saver.save(self.sess, ckpt_file, global_step=epoch)
 
 
             if args.fog_FLAG:
-                import ipdb; ipdb.set_trace()
                 for test_data in self.testset:
                     dark = np.zeros((test_data[0].shape[0], test_data[0].shape[1], test_data[0].shape[2]))
                     defog_A = np.zeros((test_data[0].shape[0], test_data[0].shape[3]))
