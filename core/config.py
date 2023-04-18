@@ -35,7 +35,7 @@ parser.add_argument('--val_path', dest='val_path', nargs='*',
                     default='data/dataset_fog/voc_norm_test.txt',
                     help='folder of the training data') 
 parser.add_argument('--test_path', dest='test_path', nargs='*',
-                    default='data/dataset_fog/quick_test.txt',
+                    default='data/dataset_fog/voc_norm_test.txt',
                     help='folder of the training data') 
 parser.add_argument('--class_name', dest='class_name', nargs='*',
                     default='data/classes/vocfog.names',
