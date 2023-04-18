@@ -40,8 +40,6 @@ config_log = os.path.join(exp_folder, 'config.txt')
 arg_dict = args.__dict__
 msg = ['{}: {}\n'.format(k, v) for k, v in arg_dict.items()]
 utils.write_mes(msg, config_log, mode='w')
-filters_names = " ".join([filter.short_name for filter in cfg.filters])
-print(filters_names)
 
 class YoloTrain(object):
     def __init__(self):
@@ -260,13 +258,14 @@ class YoloTrain(object):
 
                 pbar.set_description("train loss: %.2f" % train_step_loss)
 
-            filters_names = " ".join([filter.get_short_name() for filter in cfg.filters])
-            ckpt_file = f"{args.ckpt_dir}/yolov3_{filter_names}_train_loss={np.mean(train_epoch_loss)}:.4f.ckpt"
+            filters_names = "_".join(["DF", "WB"])
+            ckpt_file = f"{args.ckpt_dir}/yolov3_{filters_names}_train_loss={np.mean(train_epoch_loss)}:.4f.ckpt"
             self.saver.save(self.sess, ckpt_file, global_step=epoch)
 
 
+            pbar = tqdm(self.testset)
             if args.fog_FLAG:
-                for test_data in self.testset:
+                for test_data in pbar:
                     dark = np.zeros((test_data[0].shape[0], test_data[0].shape[1], test_data[0].shape[2]))
                     defog_A = np.zeros((test_data[0].shape[0], test_data[0].shape[3]))
                     IcA = np.zeros((test_data[0].shape[0], test_data[0].shape[1], test_data[0].shape[2]))
@@ -296,9 +295,9 @@ class YoloTrain(object):
                     })
 
                     test_epoch_loss.append(test_step_loss)
-
+                    pbar.set_description("test loss: %.2f" % test_step_loss)
             else:
-                for test_data in self.testset:
+                for test_data in pbar:
                     test_step_loss = self.sess.run(self.loss, feed_dict={
                         self.input_data: test_data[7],
                         self.label_sbbox: test_data[1],
@@ -312,6 +311,8 @@ class YoloTrain(object):
                     })
 
                     test_epoch_loss.append(test_step_loss)
+                    pbar.set_description("test loss: %.2f" % test_step_loss)
+
             import ipdb; ipdb.set_trace()
             train_epoch_loss, test_epoch_loss = np.mean(train_epoch_loss), np.mean(test_epoch_loss)
             ckpt_file = args.ckpt_dir + "/yolov3_test_loss=%.4f.ckpt" % test_epoch_loss
