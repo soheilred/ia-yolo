@@ -44,7 +44,7 @@ parser.add_argument('--WRITE_IMAGE_PATH', dest='WRITE_IMAGE_PATH', nargs='*',
                     default='./experiments/exp_101/detection_results/',
                     help='folder of the training data') 
 parser.add_argument('--WEIGHT_FILE', dest='WEIGHT_FILE', nargs='*',
-                    default='experiments/exp_101/checkpoint/yolov3_train_loss=1013.57.3.ckpt-1',
+                    default='experiments/exp_101/checkpoint/yolov3_train_loss=1013.5703.ckpt-1',
                     help='folder of the training data') 
 parser.add_argument('--pre_train', dest='pre_train', default='NULL',
                     help='the path of pretrained models if is not null. not used for now')
