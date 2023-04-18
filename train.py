@@ -314,7 +314,6 @@ class YoloTrain(object):
                     test_epoch_loss.append(test_step_loss)
                     pbar.set_description("test loss: %.2f" % test_step_loss)
 
-            import ipdb; ipdb.set_trace()
             train_epoch_loss, test_epoch_loss = np.mean(train_epoch_loss), np.mean(test_epoch_loss)
             ckpt_file = args.ckpt_dir + "/yolov3_test_loss=%.4f.ckpt" % test_epoch_loss
             log_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
