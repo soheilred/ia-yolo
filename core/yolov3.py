@@ -46,7 +46,6 @@ class YOLOV3(object):
         filtered_image_batch = input_data
         self.filter_params = input_data
         filter_imgs_series = []
-        import ipdb; ipdb.set_trace()
         if isp_flag:
             # start_time = time.time()
 
