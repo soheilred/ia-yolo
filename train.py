@@ -40,7 +40,7 @@ config_log = os.path.join(exp_folder, 'config.txt')
 arg_dict = args.__dict__
 msg = ['{}: {}\n'.format(k, v) for k, v in arg_dict.items()]
 utils.write_mes(msg, config_log, mode='w')
-filters_names = " ".join([filter.get_short_name() for filter in cfg.filters])
+filters_names = " ".join([filter.super().get_short_name() for filter in cfg.filters])
 print(filters_names)
 
 class YoloTrain(object):
