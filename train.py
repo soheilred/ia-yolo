@@ -40,7 +40,8 @@ config_log = os.path.join(exp_folder, 'config.txt')
 arg_dict = args.__dict__
 msg = ['{}: {}\n'.format(k, v) for k, v in arg_dict.items()]
 utils.write_mes(msg, config_log, mode='w')
-
+filters_names = " ".join([filter.get_short_name() for filter in cfg.filters])
+print(filters_names)
 
 class YoloTrain(object):
     def __init__(self):
@@ -259,7 +260,8 @@ class YoloTrain(object):
 
                 pbar.set_description("train loss: %.2f" % train_step_loss)
 
-            ckpt_file = args.ckpt_dir + "/yolov3_train_loss=%.4f.ckpt" % np.mean(train_epoch_loss)
+            filters_names = " ".join([filter.get_short_name() for filter in cfg.filters])
+            ckpt_file = f"{args.ckpt_dir}/yolov3_{filter_names}_train_loss={np.mean(train_epoch_loss)}:.4f.ckpt"
             self.saver.save(self.sess, ckpt_file, global_step=epoch)
 
 
