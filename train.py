@@ -260,6 +260,7 @@ class YoloTrain(object):
 
             filters_names = "_".join(["DF", "WB"])
             ckpt_file = f"{args.ckpt_dir}/yolov3_{filters_names}_train_loss={np.mean(train_epoch_loss)}:.4f.ckpt"
+            print(ckpt_file, "is saved")
             self.saver.save(self.sess, ckpt_file, global_step=epoch)
 
 
