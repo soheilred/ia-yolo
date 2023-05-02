@@ -258,7 +258,7 @@ class YoloTrain(object):
 
                 pbar.set_description("train loss: %.2f" % train_step_loss)
 
-            filters = ["DF", "WB", "G", "T", "C", "U"]
+            filters = ["DF", "WB"]#, "G", "T", "C", "U"]
             filters_names = "_".join(filters)
             ckpt_file = f"{args.ckpt_dir}/yolov3_{filters_names}_train_loss={np.mean(train_epoch_loss):.4f}.ckpt"
             print(ckpt_file, "is saved")
