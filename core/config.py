@@ -65,9 +65,9 @@ cfg                             = __C
 
 
 cfg.filters = [
-    # DefogFilter, ImprovedWhiteBalanceFilter, 
-    DefogFilter, ImprovedWhiteBalanceFilter,  GammaFilter,
-    ToneFilter, ContrastFilter, UsmFilter
+    DefogFilter, ImprovedWhiteBalanceFilter, 
+    # DefogFilter, ImprovedWhiteBalanceFilter,  GammaFilter,
+    # ToneFilter, ContrastFilter, UsmFilter
 ]
 
 cfg.num_filter_parameters = 15

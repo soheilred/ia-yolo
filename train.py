@@ -259,7 +259,7 @@ class YoloTrain(object):
                 pbar.set_description("train loss: %.2f" % train_step_loss)
 
             filters_names = "_".join(["DF", "WB"])
-            ckpt_file = f"{args.ckpt_dir}/yolov3_{filters_names}_train_loss={np.mean(train_epoch_loss)}:.4f.ckpt"
+            ckpt_file = f"{args.ckpt_dir}/yolov3_{filters_names}_train_loss={np.mean(train_epoch_loss):.4f}.ckpt"
             print(ckpt_file, "is saved")
             self.saver.save(self.sess, ckpt_file, global_step=epoch)
 
@@ -315,7 +315,7 @@ class YoloTrain(object):
                     pbar.set_description("test loss: %.2f" % test_step_loss)
 
             train_epoch_loss, test_epoch_loss = np.mean(train_epoch_loss), np.mean(test_epoch_loss)
-            ckpt_file = args.ckpt_dir + "/yolov3_test_loss=%.4f.ckpt" % test_epoch_loss
+            ckpt_file = f"{args.ckpt_dir} + /yolov3_test_loss={test_epoch_loss:.4f}.ckpt" 
             log_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
             print("=> Epoch: %2d Time: %s Train loss: %.2f Test loss: %.2f Saving %s ..."
                             %(epoch, log_time, train_epoch_loss, test_epoch_loss, ckpt_file))
