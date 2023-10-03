@@ -1,6 +1,8 @@
 import math
 import cv2
-import tensorflow as tf
+# import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
 import os
 import sys
 '''
@@ -223,7 +225,7 @@ def rotate_and_crop(image, angle):
 
 
 def lrelu(x, leak=0.2, name="lrelu"):
-  with tf.compat.v1.variable_scope(name):
+  with tf.variable_scope(name):
     f1 = 0.5 * (1 + leak)
     f2 = 0.5 * (1 - leak)
     return f1 * x + f2 * abs(x)
@@ -231,13 +233,13 @@ def lrelu(x, leak=0.2, name="lrelu"):
 
 # clamps to 0, 1 with leak
 def double_lrelu(x, leak=0.1, name="double_lrelu"):
-  with tf.compat.v1.variable_scope(name):
+  with tf.variable_scope(name):
     return tf.minimum(tf.maximum(leak * x, x), leak * x - (leak - 1))
 
 
 # clamp to lower, upper; leak is RELATIVE
 def leaky_clamp(x, lower, upper, leak=0.1, name="leaky_clamp"):
-  with tf.compat.v1.variable_scope(name):
+  with tf.variable_scope(name):
     x = (x - lower) / (upper - lower)
     return tf.minimum(tf.maximum(leak * x, x), leak * x -
                       (leak - 1)) * (upper - lower) + lower

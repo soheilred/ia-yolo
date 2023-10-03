@@ -1,6 +1,9 @@
-import tensorflow as tf
+# import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
 import numpy as np
-import tensorflow.contrib.layers as ly
+# import tensorflow.contrib.layers as ly
+import tensorflow.compat.v1.layers as ly
 from util_filters import lrelu, rgb2lum, tanh_range, lerp
 import cv2
 import math

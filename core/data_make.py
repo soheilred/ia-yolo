@@ -4,7 +4,6 @@ import cv2
 import math
 from numba import jit
 import random
-from tqdm import tqdm
 
 # only use the image including the labeled instance objects for training
 def load_annotations(annot_path):
@@ -16,7 +15,7 @@ def load_annotations(annot_path):
 
 
 # print('*****************Add haze offline***************************')
-def parse_annotation(annotation, img_dir):
+def parse_annotation(annotation):
 
     line = annotation.split()
     image_path = line[0]
@@ -54,22 +53,18 @@ def parse_annotation(annotation, img_dir):
         foggy_image = AddHaz_loop(img_f, center, size, beta, A)
         img_f = np.clip(foggy_image*255, 0, 255)
         img_f = img_f.astype(np.uint8)
-        img_name = img_dir + image_name \
+        img_name = '/data/vdd/liuwenyu/data_vocfog/train/JPEGImages/' + image_name \
                    + '_' + ("%.2f"%beta) + '.' + image_name_index
-        # img_name = 'data/data_vocfog/train/JPEGImages/' + image_name \
-        #            + '_' + ("%.2f"%beta) + '.' + image_name_index
-        # img_name = '/data/vdd/liuwenyu/data_vocfog/val/JPEGImages/' + image_name \
+        #img_name = '/data/vdd/liuwenyu/data_vocfog/val/JPEGImages/' + image_name \
         #   + '_' + ("%.2f"%beta) + '.' + image_name_index
         cv2.imwrite(img_name, img_f)
-        print(img_name, "is saved")
 
 
 if __name__ == '__main__':
-    # an = load_annotations('data/dataset_fog/voc_norm_train.txt')
-    an = load_annotations('data/dataset_fog/voc_norm_test.txt')
+    an = load_annotations('/home/liuwenyu.lwy/code/defog_yolov3/data/dataset/voc_norm_train.txt')
     #an = load_annotations('/home/liuwenyu.lwy/code/defog_yolov3/data/dataset/voc_norm_test.txt')
     ll = len(an)
     print(ll)
-    for j in tqdm(range(ll)):
-        parse_annotation(an[j], 'data/data_vocfog/val/JPEGImages/')
+    for j in range(ll):
+        parse_annotation(an[j])
 

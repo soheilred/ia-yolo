@@ -6,49 +6,31 @@ from easydict import EasyDict as edict
 from filters import *
 import argparse
 parser = argparse.ArgumentParser(description='')
-parser.add_argument('--exp_num', dest='exp_num', type=str, default='101',
-                    help='current experiment number') 
-parser.add_argument('--epoch_first_stage', dest='epoch_first_stage', type=int,
-                    default=0, help='# of epochs') 
-parser.add_argument('--epoch_second_stage', dest='epoch_second_stage', type=int,
-                    default=80, help='# of epochs') 
+parser.add_argument('--exp_num', dest='exp_num', type=str, default='101', help='current experiment number')
+parser.add_argument('--epoch_first_stage', dest='epoch_first_stage', type=int, default=0, help='# of epochs')
+parser.add_argument('--epoch_second_stage', dest='epoch_second_stage', type=int, default=80, help='# of epochs')
 parser.add_argument('--use_gpu', dest='use_gpu', type=int, default=1, help='gpu flag, 1 for GPU and 0 for CPU')
-parser.add_argument('--checkpoint_dir', dest='ckpt_dir', default='checkpoint',
-                    help='models are saved here') 
-parser.add_argument('--exp_dir', dest='exp_dir', default='./experiments',
-                    help='models are saved here') 
+parser.add_argument('--checkpoint_dir', dest='ckpt_dir', default='checkpoint', help='models are saved here')
+parser.add_argument('--exp_dir', dest='exp_dir', default='./experiments', help='models are saved here')
 parser.add_argument('--gpu_id', dest='gpu_id', type=str, default='7', help='if use gpu, use gpu device id')
-parser.add_argument('--ISP_FLAG', dest='ISP_FLAG', type=bool, default=True,
-                    help='whether use DIP Module') 
-parser.add_argument('--fog_FLAG', dest='fog_FLAG', type=bool, default=True,
-                    help='whether use Hybrid data training') 
-parser.add_argument('--vocfog_traindata_dir', dest='vocfog_traindata_dir',
-                    default='data/data_vocfog/train/JPEGImages/', 
-                    help='the dir contains ten levels synthetic foggy images') 
-parser.add_argument('--vocfog_valdata_dir', dest='vocfog_valdata_dir',
-                    default='data/data_vocfog/val/JPEGImages/', 
+parser.add_argument('--ISP_FLAG', dest='ISP_FLAG', type=bool, default=True, help='whether use DIP Module')
+parser.add_argument('--fog_FLAG', dest='fog_FLAG', type=bool, default=True, help='whether use Hybrid data training')
+parser.add_argument('--vocfog_traindata_dir', dest='vocfog_traindata_dir', default='/data/vdd/liuwenyu/data_vocfog/train/JPEGImages/',
                     help='the dir contains ten levels synthetic foggy images')
-parser.add_argument('--train_path', dest='train_path', nargs='*',
-                    default='data/dataset_fog/voc_norm_train.txt',
-                    help='folder of the training data') 
-parser.add_argument('--val_path', dest='val_path', nargs='*',
-                    default='data/dataset_fog/voc_norm_test.txt',
-                    help='folder of the training data') 
-parser.add_argument('--test_path', dest='test_path', nargs='*',
-                    default='data/dataset_fog/voc_norm_test.txt',
-                    help='folder of the training data') 
-parser.add_argument('--class_name', dest='class_name', nargs='*',
-                    default='data/classes/vocfog.names',
-                    help='folder of the training data') 
-parser.add_argument('--WRITE_IMAGE_PATH', dest='WRITE_IMAGE_PATH', nargs='*',
-                    default='./experiments/exp_101/detection_results/',
-                    help='folder of the training data') 
-parser.add_argument('--WEIGHT_FILE', dest='WEIGHT_FILE', nargs='*',
-                    default='experiments/exp_101/checkpoint/yolov3_test_loss=11.5631.ckpt-29',
-                    help='folder of the training data') 
-parser.add_argument('--pre_train', dest='pre_train', default='NULL',
-                    help='the path of pretrained models if is not null. not used for now')
+parser.add_argument('--vocfog_valdata_dir', dest='vocfog_valdata_dir', default='/data/vdd/liuwenyu/data_vocfog/val/JPEGImages/',
+                    help='the dir contains ten levels synthetic foggy images')
+parser.add_argument('--train_path', dest='train_path', default='./data/dataset_fog/voc_norm_train.txt', help='folder of the training data')
+parser.add_argument('--val_path', dest='val_path', nargs='*', default='./data/dataset_fog/voc_norm_test.txt', help='folder of the training data')
+parser.add_argument('--test_path', dest='test_path', nargs='*', default='./data/dataset_fog/quick_test.txt', help='folder of the training data')
+parser.add_argument('--class_name', dest='class_name', default='./data/classes/vocfog.names', help='folder of the training data')
+parser.add_argument('--WRITE_IMAGE_PATH', dest='WRITE_IMAGE_PATH', nargs='*', default='./experiments/exp_101/detection_results/', help='folder of the training data')
+parser.add_argument('--WEIGHT_FILE', dest='WEIGHT_FILE', nargs='*', default='./experiments/exp_101/checkpoint/yolov3_test_loss=5.8980.ckpt-75', help='folder of the training data')
+parser.add_argument('--pre_train', dest='pre_train', default='NULL', help='the path of pretrained models if is not null. not used for now')
 # we trained our model from scratch.
+
+
+
+
 
 args = parser.parse_args()
 
@@ -65,11 +47,9 @@ cfg                             = __C
 
 
 cfg.filters = [
-    DefogFilter, ImprovedWhiteBalanceFilter, 
-    # DefogFilter, ImprovedWhiteBalanceFilter,  GammaFilter,
-    # ToneFilter, ContrastFilter, UsmFilter
+    DefogFilter, ImprovedWhiteBalanceFilter,  GammaFilter,
+    ToneFilter, ContrastFilter, UsmFilter
 ]
-
 cfg.num_filter_parameters = 15
 
 cfg.defog_begin_param = 0
